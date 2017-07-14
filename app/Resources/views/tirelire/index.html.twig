@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>transactions list</h1>
+
+    <table class="striped highlight">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Montant</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set total = 0 %}
+        {% for transaction in transactions %}
+        {% set total = total + transaction.montant %}
+            <tr>
+                <td><a href="{{ path('tirelire_show', { 'id': transaction.id }) }}">{{ transaction.id }}</a></td>
+                <td>{% if transaction.date %}{{ transaction.date|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ transaction.montant|localizedcurrency('EUR') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="2">En cours :</th>
+                <th colspan="2">{{total|localizedcurrency('EUR') }}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tirelire_new') }}">Saisir une operation</a>
+        </li>
+    </ul>
+{% endblock %}

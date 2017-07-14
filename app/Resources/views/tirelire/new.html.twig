@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tirelire creation</h1>
+
+    {{ form_start(form) }}
+        {% if form.vars.errors|length %}
+                <div class="card-panel red">{{ form_errors(form) }}</div>
+        {% endif %}
+        <div class="input-field col s6">
+            {{ form_label(form.date) }}
+            {{ form_widget(form.date, { 'attr': {'class': 'datepicker'} }) }}
+            {{ form_errors(form.date) }}
+        </div>
+        <div class="input-field col s6">
+            {{ form_label(form.montant) }}
+            {{ form_widget(form.montant) }}
+            {{ form_errors(form.montant) }}
+        </div>
+    {{ form_widget(form.Valider, { 'attr': {'class': 'btn waves-effect waves-light'} }) }}
+
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('tirelire_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

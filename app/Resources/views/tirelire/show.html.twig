@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tirelire</h1>
+
+    <table class="striped highlight">
+        <tbody>
+            <tr>
+                <th>Transaction N.</th>
+                <td>{{ tirelire.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if tirelire.date %}{{ tirelire.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ tirelire.montant|localizedcurrency('EUR') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tirelire_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

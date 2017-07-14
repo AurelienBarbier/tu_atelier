@@ -1,0 +1,22 @@
+tirelire_index:
+    path:    /
+    defaults: { _controller: AppBundle:Tirelire:index}
+tirelire_new:
+    path:    /new
+    defaults: { _controller: AppBundle:Tirelire:new}
+tirelire_show:
+    path:    /{id}
+    defaults: { _controller: AppBundle:Tirelire:show}
+    requirements:
+        id: \d+
+tirelire_edit:
+    path:    /{id}/edit
+    defaults: { _controller: AppBundle:Tirelire:edit}
+    requirements:
+        id: \d+
+tirelire_delete:
+    path:    /{id}/delete
+    defaults: { _controller: AppBundle:Tirelire:delete}
+    requirements:
+        id: \d+
+
