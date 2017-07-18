@@ -40,7 +40,6 @@ class TransactionCheckerTest extends TestCase
 
         $this->transacChecker = new TransactionChecker($this->objectManager);
 
-        //parent::__construct();
     }
 
     /**

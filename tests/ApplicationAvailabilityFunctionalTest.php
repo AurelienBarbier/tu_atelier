@@ -30,6 +30,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
             array('/'),
             array('/new'),
             array('/25'),
+            array('/25/edit'),
         );
     }
 }

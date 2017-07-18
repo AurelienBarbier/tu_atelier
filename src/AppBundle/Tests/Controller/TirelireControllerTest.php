@@ -13,7 +13,7 @@ class TirelireControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/tirelire/');
+        $crawler = $client->request('GET', '/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /tirelire/");
         $crawler = $client->click($crawler->selectLink('Saisir une operation')->link());
 

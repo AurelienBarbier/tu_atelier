@@ -25,7 +25,7 @@ class TransactionChecker
         if(0 > $amount){
 
             $provision = $this->em->getRepository('AppBundle:Tirelire')->getTotalAmount();
-            return  (0 < ($provision + $amount));
+            return  (0 <= ($provision + $amount));
         }
 
         return true;
