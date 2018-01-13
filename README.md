@@ -20,9 +20,11 @@ Simuler un prélèvement trop important.
 
 ## Fichiers concernés
 
-src/AppBundle/Controller/TirelireController.php
-src/AppBundle/Service/TransactionChecker.php
-tests/AppBundle/Service/TransactionCheckerTest.php
-tests/ApplicationAvailabilityFunctionalTest.php
+* src/AppBundle/
+  * Controller/TirelireController.php
+  * Service/TransactionChecker.php
+* tests/
+  * AppBundle/Service/TransactionCheckerTest.php
+  * ApplicationAvailabilityFunctionalTest.php
 
 
