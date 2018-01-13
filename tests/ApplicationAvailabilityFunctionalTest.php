@@ -29,8 +29,27 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         return array(
             array('/'),
             array('/new'),
-            array('/25'),
-            array('/25/edit'),
+            array('/2')
+        );
+    }
+
+
+    /**
+     * @dataProvider urlFailProvider
+     */
+    public function testPageFail($url)
+    {
+
+        $client = self::createClient();
+        $client->request('GET', $url);
+        $this->assertTrue($client->getResponse()->isNotFound());
+    }
+
+    public function urlFailProvider()
+    {
+        return array(
+            array('/200000'),
+            array('/2/edit'),
         );
     }
 }

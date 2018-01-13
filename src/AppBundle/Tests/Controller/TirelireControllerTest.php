@@ -17,9 +17,11 @@ class TirelireControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /tirelire/");
         $crawler = $client->click($crawler->selectLink('Saisir une operation')->link());
 
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('VALIDER')->form(array(
-            'appbundle_tirelire[montant]'  => 50,
+        // Fill in the form with rand value and submit it
+        $randAmount = rand(0, 1000);
+        $form = $crawler->selectButton('Valider')->form(array(
+            'appbundle_tirelire[montant]'  => $randAmount,
+            'appbundle_tirelire[date]'  => date('d/m/Y'),
             // ... other fields to fill
         ));
 
@@ -27,7 +29,7 @@ class TirelireControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
 
         // Check data in the show view
-        //$this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
+        $this->assertSame($randAmount, intval($crawler->filter('#transactions-list tbody tr:last-child .amount')->text()), 'Missing element #transactions-list tbody tr:last-child .amount');
 
         /*// Edit the entity
         $crawler = $client->click($crawler->selectLink('Edit')->link());

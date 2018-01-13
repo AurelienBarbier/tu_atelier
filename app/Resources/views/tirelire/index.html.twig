@@ -3,7 +3,7 @@
 {% block body %}
     <h1>transactions list</h1>
 
-    <table class="striped highlight">
+    <table id="transactions-list"  class="striped highlight">
         <thead>
             <tr>
                 <th>Id</th>
@@ -18,7 +18,7 @@
             <tr>
                 <td><a href="{{ path('tirelire_show', { 'id': transaction.id }) }}">{{ transaction.id }}</a></td>
                 <td>{% if transaction.date %}{{ transaction.date|date('d/m/Y') }}{% endif %}</td>
-                <td>{{ transaction.montant|localizedcurrency('EUR') }}</td>
+                <td class="amount">{{ transaction.montant|localizedcurrency('EUR') }}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -81,7 +81,7 @@ class TirelireController extends Controller
      * Displays a form to edit an existing tirelire entity.
      *
      */
-    public function editAction(Request $request, Tirelire $tirelire)
+    public function editAction()
     {
         throw new NotFoundHttpException('Sorry this action is not possile !');
     }
@@ -90,7 +90,7 @@ class TirelireController extends Controller
      * Deletes a tirelire entity.
      *
      */
-    public function deleteAction(Request $request, Tirelire $tirelire)
+    public function deleteAction()
     {
         throw new NotFoundHttpException('Sorry this action is not possile !');
     }

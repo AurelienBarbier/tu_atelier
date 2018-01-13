@@ -11,34 +11,35 @@ namespace Tests\AppBundle\Service;
 
 use AppBundle\Repository\TirelireRepository;
 use AppBundle\Service\TransactionChecker;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 
 class TransactionCheckerTest extends TestCase
 {
 
-    private $objectManager;
-    private $transacChecker;
+    const REF_AMOUNT = 100;
+
+    private $fakeEntityManager;
+    private $transactionChecker;
 
     public function setUp()
     {
 
-        // Creation de notre EntityManager Factice
-        $this->objectManager = $this->createMock(EntityManager::class);
-        // Creation de notre Repository Factice
+        // Create our fake EntityManager
+        $this->fakeEntityManager = $this->createMock(EntityManager::class);
+        // Create our FAKE Repository #STOCK
         $tirelireRepository = $this->createMock(TirelireRepository::class);
-        // Mise en place de notre valeur fixe que nous retourne la Methode getTotalAmount
+        // Define fixed reference value returned by getTotalAmount #MOCK
         $tirelireRepository->expects($this->any())
             ->method('getTotalAmount')
-            ->willReturn(100);
-        // Mise en place de notre "faux" repository comme objet retourné par
-        // l'appel de getRepository sur notre "faux" entityManager
-        $this->objectManager->expects($this->any())
+            ->willReturn(self::REF_AMOUNT);
+        // Setting up our "fake" repository as an object returned by
+        // the call of getRepository on our "fake" fakeEntityManager
+        $this->fakeEntityManager->expects($this->any())
             ->method('getRepository')
             ->willReturn($tirelireRepository);
 
-        $this->transacChecker = new TransactionChecker($this->objectManager);
+        $this->transactionChecker = new TransactionChecker($this->fakeEntityManager);
 
     }
 
@@ -50,7 +51,7 @@ class TransactionCheckerTest extends TestCase
      */
     public function testSuccess($amount)
     {
-        $this->assertTrue($this->transacChecker->isAllowed($amount));
+        $this->assertTrue($this->transactionChecker->isAllowed($amount));
     }
 
 
@@ -61,10 +62,15 @@ class TransactionCheckerTest extends TestCase
      */
     public function testFailure()
     {
-        $this->assertFalse($this->transacChecker->isAllowed(-125));
+        $this->assertFalse($this->transactionChecker->isAllowed(-125));
     }
 
 
+    /**
+     *  Test a successful set of data for transaction cause amount money is not enough
+     *
+     *
+     */
     public  function transactionsSuccessProvider()
     {
         return [
